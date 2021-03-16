@@ -191,6 +191,21 @@ def print_comparison_by_correctness(ratings, correctness):
     print(incorrect_full)
 
 
+    all_truncs = [correct_trunc[i] + incorrect_trunc[i] for i in range(len(correct_trunc))]
+    all_fulls = [correct_full[i] + incorrect_full[i] for i in range(len(correct_full))]
+
+    from scipy.stats import wilcoxon, chi2_contingency, shapiro
+    print(shapiro(all_fulls))
+    print(shapiro(all_truncs))
+    w, p1 = wilcoxon(all_truncs, all_fulls)
+    print(w)
+    print(p1)
+
+    data = [all_truncs, all_fulls]
+    stat, p, dof, expected = chi2_contingency(data)
+    print(p)
+
+
 
 
 ratings = get_all_ratings()
@@ -213,6 +228,7 @@ print_avg_of_ratings(ratings, False)
 print(" ")
 print("------Compared with Labels-------")
 print_comparison_by_correctness(ratings, correctness)
+
 
 
 

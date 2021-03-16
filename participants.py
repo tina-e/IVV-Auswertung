@@ -29,14 +29,15 @@ for item in data:
         elif key == "participantsNotedDots":
             noted_dots.append(int(value))
         elif key == "itInfluenzedPartizipants":
-            influenced.append(int(value))
+            if value != 0: influenced.append(int(value))
         elif key == "credibleChangeGeneral":
             cred_general.append(int(value))
         elif key == "harderToRead":
             harder_read.append(int(value))
+
 print("noticed any difference:", noted_diff.count(1), "/", len(data))
 print("noticed dots: immediately:", noted_diff.count(1), "| yes, but no attention:", noted_diff.count(2), "| no:", noted_diff.count(3))
-print("avg rating for influenced:", statistics.mean(influenced))
-print("avg rating for influenced:", statistics.mean(influenced))
-print("avg rating for general judgements:", statistics.mean(cred_general))
-print("avg rating for harder to read:", statistics.mean(harder_read))
+print("avg rating for influenced:", statistics.mean(influenced), "/ 5 -- ", (statistics.mean(influenced)/5))
+
+print("avg rating for general judgements:", statistics.mean(cred_general), "/ 6 -- ", (statistics.mean(cred_general)/6))
+print("avg rating for harder to read:", statistics.mean(harder_read), "/ 4 -- ", (statistics.mean(harder_read)/4))
